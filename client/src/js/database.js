@@ -15,22 +15,25 @@ const initdb = async () =>
 const dbPromise = initdb();
 
 export const putDb = async (content) => {
+  try {
   const db = await dbPromise;
   const tx = db.transaction('jate', 'readwrite');
   const store = tx.objectStore('jate');
   await store.add(content);
-}.catch {
-  console.error('putDb not implemented');
-}
+  } catch {
+    console.error('putDb not implemented');
+  }
+};
 
-// TODO: Add logic for a method that gets all the content from the database
 export const getDb = async () => {
+  try {
   const db = await dbPromise;
   const tx = db.transaction('jate', 'readonly');
   const store = tx.objectStore('jate');
   return store.getAll();
-}.cath{
-  cconsole.error('getDb not implemented');
+  } catch{
+    cconsole.error('getDb not implemented');
+  }
 }
 
 export default initdb();
